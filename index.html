@@ -31,7 +31,7 @@
 		<script type="text/javascript">
 			mixpanel.track('page load');
 			function printData() {	
-				var county=document.getElementById('countyfield').toLowerCase();
+				var county=document.getElementById('countyfield').value.toLowerCase();
 				
 				mixpanel.track('addcounty', {"county":county} );
 
