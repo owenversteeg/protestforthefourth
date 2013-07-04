@@ -57,6 +57,8 @@
 				
 				mixpanel.track('addcounty', {"county":county} );
 				
+				document.getElementById('hideme').style.visibility = "visible";
+				
 				document.getElementById('countyb').innerText = county;
 				
 				document.getElementById('collab').href = "http://infinitynote.com/p/protestforthefourth_"+county;
@@ -84,8 +86,10 @@
 		<h3>Click Submit to add yourself to the list of protesters for your county.</h3>
 		<a href="#" onclick="printData();"><button class="smooth btn-a">Submit</button></a>
 		<br><br>
+		<div style="visibility:hidden" id="hideme">
 		<h3>There are <b id="others">0</b> other protesters from <b id="countyb">county</b> county.</h3>
-		<a id="collab" href="http://infinitynote.com/p/protestforthefourth_county">Collaborate with them here.</a>
+		<h3><a id="collab" href="http://infinitynote.com/p/protestforthefourth_county">Collaborate with them here.</a></h3>
+		</div>
 		<script src="http://api.duckduckgo.com/?q=what%20is%20my%20ip&format=json&callback=findCty"></script>
 	</body>
 </html>
