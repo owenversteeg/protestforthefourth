@@ -45,7 +45,7 @@
 				if (xmlhttp.readyState === 4 && xmlhttp.status === 200){
 					console.log(xmlhttp.responseText);
 				    	if (document.getElementById('countyfield').value == "County") {
-				    		document.getElementById('countyfield').value = parseJSON(xmlhttp.responseText).county;
+				    		document.getElementById('countyfield').value = JSON.parse(xmlhttp.responseText).county;
 				    	}
 				}
 			}
