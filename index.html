@@ -52,30 +52,44 @@
 		
 			mixpanel.track('page load');
 			var county;
-			function printData() {	
+			function printData() {
 				county=document.getElementById('countyfield').value.toLowerCase();
 				
-				mixpanel.track('addcounty', {"county":county} );
+				if (Cookies.get('submitted')) {
+					mixpanel.track('addcounty', {"county":county, "firsttime": false} );
+				}
+				else {
+					mixpanel.track('addcounty', {"county":county, "firsttime": true} );
+				}
 				
 				document.getElementById('hideme').style.visibility = "visible";
 				
 				document.getElementById('countyb').innerText = county;
 				
 				document.getElementById('collab').href = "http://infinitynote.com/p/protestforthefourth_"+county;
+
 				
 				var xmlhttp = new XMLHttpRequest();
 
-				whatToGet = "http://www.bigrectangle.com/writedb.php?county="+county;
-		
+				if (Cookies.get("submitted")) {
+					whatToGet = "http://www.bigrectangle.com/readdb.php?county="+county;
+				}
+				else {
+					whatToGet = "http://www.bigrectangle.com/writedb.php?county="+county;
+				}
+				
+				
 				xmlhttp.open('GET', whatToGet, false);
 		
 				xmlhttp.send(null);  // No data need to send along with the request.
 		
 				if (xmlhttp.readyState === 4 && xmlhttp.status === 200){
-				    console.log(xmlhttp.responseText);
-				    document.getElementById('others').innerText = xmlhttp.responseText;
+					Cookies.set("submitted", true);
+					console.log(xmlhttp.responseText);
+					document.getElementById('others').innerText = xmlhttp.responseText;
 				}
 			}
+			<script src="cookies.js"></script>
 		</script>
 	</head>
 	<body>
